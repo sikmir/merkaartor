@@ -4183,6 +4183,7 @@ QStringList MainWindow::translationPaths() {
     paths << QCoreApplication::applicationDirPath() + "/translations";
 #if defined(Q_OS_MAC)
     paths << macOsTranslationsPath();
+    paths << macOsTranslationsPath() + "/translations";
 #elif defined(Q_OS_WIN)
     /* TODO: Almost TRANSDIR_MERKAARTOR, unfortunately the user can change the path in installer... */
     paths << QCoreApplication::applicationDirPath() + "/../share/merkaartor/translations";
