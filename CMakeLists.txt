@@ -441,8 +441,11 @@ set(MERKAARTOR_SHARE_FILES
   ${CMAKE_SOURCE_DIR}/share/WmsServersList.xml
 )
 
-install( FILES ${MERKAARTOR_SHARE_FILES} DESTINATION share/merkaartor)
-set_source_files_properties(${MEKAARTOR_SHARE_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+if (APPLE)
+  set_source_files_properties(${MEKAARTOR_SHARE_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+else()
+  install( FILES ${MERKAARTOR_SHARE_FILES} DESTINATION share/merkaartor)
+endif()
 
 set(TS_FILES
   ${CMAKE_SOURCE_DIR}/translations/merkaartor_cs.ts
@@ -467,7 +470,11 @@ set(TS_FILES
 qt_add_translation(QM_FILES
     ${TS_FILES}
 )
-install( FILES ${QM_FILES} DESTINATION share/merkaartor/translations )
+if (APPLE)
+  set_source_files_properties(${QM_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/translations")
+else()
+  install( FILES ${QM_FILES} DESTINATION share/merkaartor/translations )
+endif()
 
 find_program(LUPDATE lupdate)
 add_custom_target(update-translations COMMAND ${LUPDATE} ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/plugins -source-language en -target-language en -ts ${CMAKE_SOURCE_DIR}/translations/merkaartor_en.ts)
