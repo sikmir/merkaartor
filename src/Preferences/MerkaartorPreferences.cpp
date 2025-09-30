@@ -1455,11 +1455,10 @@ void MerkaartorPreferences::loadWMSesFromFile(QString fileName)
 
 void MerkaartorPreferences::loadWMSes()
 {
-    loadWMSesFromFile(HOMEDIR + "/WmsServersList.xml");
-    // TODO: Why is the Q_OS_MAC override in getPreferenceDirectories()
-    // missing here? Is that a bug, or an intention?
-    loadWMSesFromFile(QString(BuildMetadata::GetShareDir()) + "/WmsServersList.xml");
-    loadWMSesFromFile(":/WmsServersList.xml");
+    const QStringList paths = getPreferenceFilePaths("WmsServersList.xml");
+    for (QStringList::const_iterator i = paths.begin(); i != paths.end(); ++i) {
+        loadWMSesFromFile(*i);
+    }
 }
 
 void MerkaartorPreferences::saveWMSes()
@@ -1508,11 +1507,10 @@ void MerkaartorPreferences::loadTMSesFromFile(QString fileName)
 
 void MerkaartorPreferences::loadTMSes()
 {
-    loadTMSesFromFile(HOMEDIR + "/TmsServersList.xml");
-    // TODO: Why is the Q_OS_MAC override in getPreferenceDirectories()
-    // missing here? Is that a bug, or an intention?
-    loadTMSesFromFile(QString(BuildMetadata::GetShareDir()) + "/TmsServersList.xml");
-    loadTMSesFromFile(":/TmsServersList.xml");
+    const QStringList paths = getPreferenceFilePaths("TmsServersList.xml");
+    for (QStringList::const_iterator i = paths.begin(); i != paths.end(); ++i) {
+        loadTMSesFromFile(*i);
+    }
 }
 
 void MerkaartorPreferences::saveTMSes()
@@ -1561,11 +1559,10 @@ void MerkaartorPreferences::loadBookmarksFromFile(QString fileName)
 
 void MerkaartorPreferences::loadBookmarks()
 {
-    loadBookmarksFromFile(HOMEDIR + "/BookmarksList.xml");
-    // TODO: Why is the Q_OS_MAC override in getPreferenceDirectories()
-    // missing here? Is that a bug, or an intention?
-    loadBookmarksFromFile(QString(BuildMetadata::GetShareDir()) + "/BookmarksList.xml");
-    loadBookmarksFromFile(":/BookmarksList.xml");
+    const QStringList paths = getPreferenceFilePaths("BookmarksList.xml");
+    for (QStringList::const_iterator i = paths.begin(); i != paths.end(); ++i) {
+        loadBookmarksFromFile(*i);
+    }
 }
 
 void MerkaartorPreferences::saveBookmarks()
